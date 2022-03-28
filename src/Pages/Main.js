@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { Axios } from "axios";
 import { Tab } from "bootstrap";
 import React, { useEffect, useState } from "react";
 import {
@@ -25,23 +25,14 @@ export const Main = () => {
     axios.defaults.headers = {
       "Access-Control-Allow-Origin": "*",
     };
-   
+
     axios
       .get(
-        `https://api.darksky.net/forecast/a177f8481c31fa96c3f95ad4f4f84610/${latitude},${longitude}`,
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "*",
-          },
-          proxy: {
-            host: "http://localhost",
-            port: 3000,
-          },
-        }
+        `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&exclude=hourly,daily&appid=ffe4950e60a08e7fb31d118c565ed86c
+        `,
+        {}
       )
-      .then((res) => console.log(res));
- 
+      .then((res) => console.log(res.data));
   }
 
   function error() {}
@@ -55,7 +46,9 @@ export const Main = () => {
   return (
     <Container className="text-light">
       <Navbar>
-        <NavbarBrand className="text-light me-auto">INSTAWEATHER</NavbarBrand>
+        <NavbarBrand className="text-light me-auto fw-bold">
+          INSTAWEATHER
+        </NavbarBrand>
         {/* to add toggle button */}
         <ToggleButtonGroup
           type="checkbox"
