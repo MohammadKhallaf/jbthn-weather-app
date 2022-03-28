@@ -14,9 +14,53 @@ import {
 } from "react-bootstrap";
 import cloudy from "../assets/icons/clouody.png";
 export const Main = () => {
+  const mock = {
+    coord: {
+      lon: 29.5705,
+      lat: 30.8548,
+    },
+    weather: [
+      {
+        id: 800,
+        main: "Clear",
+        description: "clear sky",
+        icon: "01d",
+      },
+    ],
+    base: "stations",
+    main: {
+      temp: 20.77,
+      feels_like: 20.18,
+      temp_min: 20.77,
+      temp_max: 20.77,
+      pressure: 1025,
+      humidity: 49,
+    },
+    visibility: 10000,
+    wind: {
+      speed: 4.12,
+      deg: 350,
+    },
+    clouds: {
+      all: 0,
+    },
+    dt: 1648470822,
+    sys: {
+      type: 1,
+      id: 2512,
+      country: "EG",
+      sunrise: 1648439750,
+      sunset: 1648484258,
+    },
+    timezone: 7200,
+    id: 358333,
+    name: "Dawwār Abū al ‘Āşī",
+    cod: 200,
+  };
   const [key, setKey] = useState("hourly");
   const [value, setValue] = useState("f");
   const handleChange = (val) => setValue(val);
+  const [weatherData, setWeatherData] = useState();
   const date = new Date();
 
   function success(position) {
@@ -28,11 +72,11 @@ export const Main = () => {
 
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&exclude=hourly,daily&appid=ffe4950e60a08e7fb31d118c565ed86c
+        `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&exclude=hourly,daily&appid=ffe4950e60a08e7fb31d118c565ed86c&units=metric
         `,
         {}
       )
-      .then((res) => console.log(res.data));
+      .then((res) => setWeatherData(res.data));
   }
 
   function error() {}
@@ -43,6 +87,9 @@ export const Main = () => {
     }
     return () => {};
   }, []);
+  // useEffect(() => {
+
+  // }, [weatherData]);
   return (
     <Container className="text-light">
       <Navbar>
@@ -77,14 +124,14 @@ export const Main = () => {
               <Col xs="12">
                 <img src={cloudy} alt="" />
               </Col>
-              <Col xs="12">Cloudy</Col>
+              <Col xs="12">{weatherData?.weather[0].main}</Col>
             </Row>
           </Col>
           {/* Weather */}
           <Col xs="6">
-            <Col className="fs-3">72 °</Col>
+            <Col className="fs-3">{weatherData?.main.temp}</Col>
             <Col>81° /83° </Col>
-            <Col>cloud through</Col>
+            <Col>{weatherData?.weather[0].description}</Col>
           </Col>
         </Row>
       </Container>
@@ -102,118 +149,6 @@ export const Main = () => {
         <Container fluid>
           {
             <Row>
-              <Stack
-                gap={3}
-                style={{ width: "3rem" }}
-                className="d-flex align-items-center"
-              >
-                <div>10:00 </div>
-                <img
-                  src={cloudy}
-                  style={{ width: "3rem" }}
-                  className=""
-                  alt=""
-                />
-                <div>81 deg</div>
-              </Stack>
-              <Stack
-                gap={3}
-                style={{ width: "3rem" }}
-                className="d-flex align-items-center"
-              >
-                <div>10:00 </div>
-                <img
-                  src={cloudy}
-                  style={{ width: "3rem" }}
-                  className=""
-                  alt=""
-                />
-                <div>81 deg</div>
-              </Stack>
-              <Stack
-                gap={3}
-                style={{ width: "3rem" }}
-                className="d-flex align-items-center"
-              >
-                <div>10:00 </div>
-                <img
-                  src={cloudy}
-                  style={{ width: "3rem" }}
-                  className=""
-                  alt=""
-                />
-                <div>81 deg</div>
-              </Stack>
-              <Stack
-                gap={3}
-                style={{ width: "3rem" }}
-                className="d-flex align-items-center"
-              >
-                <div>10:00 </div>
-                <img
-                  src={cloudy}
-                  style={{ width: "3rem" }}
-                  className=""
-                  alt=""
-                />
-                <div>81 deg</div>
-              </Stack>
-              <Stack
-                gap={3}
-                style={{ width: "3rem" }}
-                className="d-flex align-items-center"
-              >
-                <div>10:00 </div>
-                <img
-                  src={cloudy}
-                  style={{ width: "3rem" }}
-                  className=""
-                  alt=""
-                />
-                <div>81 deg</div>
-              </Stack>
-              <Stack
-                gap={3}
-                style={{ width: "3rem" }}
-                className="d-flex align-items-center"
-              >
-                <div>10:00 </div>
-                <img
-                  src={cloudy}
-                  style={{ width: "3rem" }}
-                  className=""
-                  alt=""
-                />
-                <div>81 deg</div>
-              </Stack>
-              <Stack
-                gap={3}
-                style={{ width: "3rem" }}
-                className="d-flex align-items-center"
-              >
-                <div>10:00 </div>
-                <img
-                  src={cloudy}
-                  style={{ width: "3rem" }}
-                  className=""
-                  alt=""
-                />
-                <div>81 deg</div>
-              </Stack>
-              <Stack
-                gap={3}
-                style={{ width: "3rem" }}
-                className="d-flex align-items-center"
-              >
-                <div>10:00 </div>
-                <img
-                  src={cloudy}
-                  style={{ width: "3rem" }}
-                  className=""
-                  alt=""
-                />
-                <div>81 deg</div>
-              </Stack>
               <Stack
                 gap={3}
                 style={{ width: "3rem" }}
