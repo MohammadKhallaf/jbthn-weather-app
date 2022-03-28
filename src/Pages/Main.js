@@ -1,10 +1,9 @@
+import axios from "axios";
 import { Tab } from "bootstrap";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  ButtonGroup,
   Col,
   Container,
-  Nav,
   Navbar,
   NavbarBrand,
   Row,
@@ -23,20 +22,36 @@ export const Main = () => {
   function success(position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
-    console.log(latitude, longitude);
-    // status.textContent = '';
-    // mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
-    // mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+    axios.defaults.headers = {
+      "Access-Control-Allow-Origin": "*",
+    };
+   
+    axios
+      .get(
+        `https://api.darksky.net/forecast/a177f8481c31fa96c3f95ad4f4f84610/${latitude},${longitude}`,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "*",
+          },
+          proxy: {
+            host: "http://localhost",
+            port: 3000,
+          },
+        }
+      )
+      .then((res) => console.log(res));
+ 
   }
 
-  function error() {
-    // status.textContent = 'Unable to retrieve your location';
-  }
-
-  if (!navigator.geolocation) {
-  } else {
-    navigator.geolocation.getCurrentPosition(success, error);
-  }
+  function error() {}
+  useEffect(() => {
+    if (!navigator.geolocation) {
+    } else {
+      navigator.geolocation.getCurrentPosition(success, error);
+    }
+    return () => {};
+  }, []);
   return (
     <Container className="text-light">
       <Navbar>
@@ -67,7 +82,7 @@ export const Main = () => {
               <Col>{`${date.getDate()} ,${date.getMonth()}, ${date.getFullYear()}`}</Col>
               <Col xs="12"></Col>
               <Col xs="12">
-                <img src={cloudy} />
+                <img src={cloudy} alt="" />
               </Col>
               <Col xs="12">Cloudy</Col>
             </Row>
@@ -94,62 +109,132 @@ export const Main = () => {
         <Container fluid>
           {
             <Row>
-              <Stack gap={3} style={{ width: "3rem" }} className="d-flex align-items-center">
+              <Stack
+                gap={3}
+                style={{ width: "3rem" }}
+                className="d-flex align-items-center"
+              >
                 <div>10:00 </div>
-                <img src={cloudy} style={{ width: "3rem" }} className=""/>
+                <img
+                  src={cloudy}
+                  style={{ width: "3rem" }}
+                  className=""
+                  alt=""
+                />
                 <div>81 deg</div>
               </Stack>
-              <Stack gap={3} style={{ width: "3rem" }} className="d-flex align-items-center">
+              <Stack
+                gap={3}
+                style={{ width: "3rem" }}
+                className="d-flex align-items-center"
+              >
                 <div>10:00 </div>
-                <img src={cloudy} style={{ width: "3rem" }} className=""/>
+                <img
+                  src={cloudy}
+                  style={{ width: "3rem" }}
+                  className=""
+                  alt=""
+                />
                 <div>81 deg</div>
               </Stack>
-              <Stack gap={3} style={{ width: "3rem" }} className="d-flex align-items-center">
+              <Stack
+                gap={3}
+                style={{ width: "3rem" }}
+                className="d-flex align-items-center"
+              >
                 <div>10:00 </div>
-                <img src={cloudy} style={{ width: "3rem" }} className=""/>
+                <img
+                  src={cloudy}
+                  style={{ width: "3rem" }}
+                  className=""
+                  alt=""
+                />
                 <div>81 deg</div>
               </Stack>
-              <Stack gap={3} style={{ width: "3rem" }} className="d-flex align-items-center">
+              <Stack
+                gap={3}
+                style={{ width: "3rem" }}
+                className="d-flex align-items-center"
+              >
                 <div>10:00 </div>
-                <img src={cloudy} style={{ width: "3rem" }} className=""/>
+                <img
+                  src={cloudy}
+                  style={{ width: "3rem" }}
+                  className=""
+                  alt=""
+                />
                 <div>81 deg</div>
               </Stack>
-              <Stack gap={3} style={{ width: "3rem" }} className="d-flex align-items-center">
+              <Stack
+                gap={3}
+                style={{ width: "3rem" }}
+                className="d-flex align-items-center"
+              >
                 <div>10:00 </div>
-                <img src={cloudy} style={{ width: "3rem" }} className=""/>
+                <img
+                  src={cloudy}
+                  style={{ width: "3rem" }}
+                  className=""
+                  alt=""
+                />
                 <div>81 deg</div>
               </Stack>
-              <Stack gap={3} style={{ width: "3rem" }} className="d-flex align-items-center">
+              <Stack
+                gap={3}
+                style={{ width: "3rem" }}
+                className="d-flex align-items-center"
+              >
                 <div>10:00 </div>
-                <img src={cloudy} style={{ width: "3rem" }} className=""/>
+                <img
+                  src={cloudy}
+                  style={{ width: "3rem" }}
+                  className=""
+                  alt=""
+                />
                 <div>81 deg</div>
               </Stack>
-              <Stack gap={3} style={{ width: "3rem" }} className="d-flex align-items-center">
+              <Stack
+                gap={3}
+                style={{ width: "3rem" }}
+                className="d-flex align-items-center"
+              >
                 <div>10:00 </div>
-                <img src={cloudy} style={{ width: "3rem" }} className=""/>
+                <img
+                  src={cloudy}
+                  style={{ width: "3rem" }}
+                  className=""
+                  alt=""
+                />
                 <div>81 deg</div>
               </Stack>
-              <Stack gap={3} style={{ width: "3rem" }} className="d-flex align-items-center">
+              <Stack
+                gap={3}
+                style={{ width: "3rem" }}
+                className="d-flex align-items-center"
+              >
                 <div>10:00 </div>
-                <img src={cloudy} style={{ width: "3rem" }} className=""/>
+                <img
+                  src={cloudy}
+                  style={{ width: "3rem" }}
+                  className=""
+                  alt=""
+                />
                 <div>81 deg</div>
               </Stack>
-              <Stack gap={3} style={{ width: "3rem" }} className="d-flex align-items-center">
+              <Stack
+                gap={3}
+                style={{ width: "3rem" }}
+                className="d-flex align-items-center"
+              >
                 <div>10:00 </div>
-                <img src={cloudy} style={{ width: "3rem" }} className=""/>
+                <img
+                  src={cloudy}
+                  style={{ width: "3rem" }}
+                  className=""
+                  alt=""
+                />
                 <div>81 deg</div>
               </Stack>
-              <Stack gap={3} style={{ width: "3rem" }} className="d-flex align-items-center">
-                <div>10:00 </div>
-                <img src={cloudy} style={{ width: "3rem" }} className=""/>
-                <div>81 deg</div>
-              </Stack>
-              <Stack gap={3} style={{ width: "3rem" }} className="d-flex align-items-center">
-                <div>10:00 </div>
-                <img src={cloudy} style={{ width: "3rem" }} className=""/>
-                <div>81 deg</div>
-              </Stack>
-              
             </Row>
           }
         </Container>
