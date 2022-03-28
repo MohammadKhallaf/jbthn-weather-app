@@ -72,7 +72,7 @@ export const Main = () => {
 
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&exclude=hourly,daily&appid=ffe4950e60a08e7fb31d118c565ed86c&units=metric
+        `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&exclude=hourly,daily&appid=ffe4950e60a08e7fb31d118c565ed86c&units=${value=="c"?"metric":"imperial"}
         `,
         {}
       )
@@ -86,7 +86,7 @@ export const Main = () => {
       navigator.geolocation.getCurrentPosition(success, error);
     }
     return () => {};
-  }, []);
+  }, [value]);
   // useEffect(() => {
 
   // }, [weatherData]);
